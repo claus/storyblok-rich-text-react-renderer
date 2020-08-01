@@ -18,7 +18,7 @@ export const MARK_UNDERLINE = 'underline';
 export const MARK_CODE = 'code';
 export const MARK_LINK = 'link';
 
-export function storyblokRichTextRenderer(document, options = {}) {
+export function render(document, options = {}) {
     if (
         typeof document === 'object' &&
         document.type === 'doc' &&
