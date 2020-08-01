@@ -1,0 +1,43 @@
+{
+  "name": "storyblok-rich-text-react-renderer",
+  "description": "A React renderer for Storyblok rich text content",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "author": {
+    "name": "Claus Wahlers",
+    "email": "claus@codeazur.com.br"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claus/storyblok-rich-text-react-renderer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/claus/storyblok-rich-text-react-renderer/issues"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "storyblok",
+    "react",
+    "rich text",
+    "resolver",
+    "renderer"
+  ],
+  "peerDependencies": {
+    "react": "^16.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-transform-arrow-functions": "^7.10.4",
+    "@babel/plugin-transform-destructuring": "^7.10.4",
+    "@rollup/plugin-babel": "^5.1.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "rollup": "^2.23.0",
+    "rollup-plugin-peer-deps-external": "^2.2.3"
+  }
+}

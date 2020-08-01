@@ -1,0 +1,7 @@
+{
+  "plugins": [
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-transform-destructuring",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
+}
