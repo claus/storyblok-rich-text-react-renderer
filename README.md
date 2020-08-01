@@ -88,7 +88,7 @@ render(document, {
 });
 ```
 
-#### Example: Map link elements to Next.js' <Link> component
+#### Example: Map link elements to Next.js' `<Link>` component
 
 ```js
 import Link from 'next/link';
