@@ -1,5 +1,9 @@
 # Storyblok Rich Text Renderer for React
 
+[![npm](https://img.shields.io/npm/v/storyblok-rich-text-react-renderer?style=flat-square)](https://www.npmjs.com/package/storyblok-rich-text-react-renderer)
+[![GitHub](https://img.shields.io/github/license/claus/storyblok-rich-text-react-renderer?style=flat-square)](https://github.com/claus/storyblok-rich-text-react-renderer/blob/master/LICENSE)
+
+
 Renders Storyblok rich text content to React elements.
 
 ## Motivation
