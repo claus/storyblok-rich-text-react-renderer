@@ -1,7 +1,7 @@
 {
   "name": "storyblok-rich-text-react-renderer",
   "description": "A React renderer for Storyblok rich text content",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-transform-arrow-functions": "^7.10.4",
     "@babel/plugin-transform-destructuring": "^7.10.4",
