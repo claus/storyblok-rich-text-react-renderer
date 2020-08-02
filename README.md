@@ -69,7 +69,7 @@ render(document, {
 
 Mark resolvers are used to map inline elements.
 
-Use the `nodeResolvers` option to add mark resolvers.
+Use the `markResolvers` option to add mark resolvers.
 
 Supported element types and their resolver function signatures are:
 
@@ -153,7 +153,7 @@ render(document, {
 
 Blok resolvers are used to map embedded Storyblok components.
 
-Use the `blokResolvers` option to add blok resolvers. Keys are the component's ("technical") name. The function signature is always `(props) => { ... }`, where `props` is an object that contains all the component's fields, as well as its `_uid` and `_editable` values.
+Use the `blokResolvers` option to add blok resolvers. Keys are the Storyblok component's "technical" name. The function signature is always `(props) => { ... }`, where `props` is an object that contains all the component's fields, as well as its `_uid` and `_editable` values.
 
 #### Example: Map blok elements to custom React components
 
