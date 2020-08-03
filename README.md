@@ -78,6 +78,7 @@ Supported element types and their resolver function signatures are:
 - MARK_STRIKE - `(children) => { ... }`
 - MARK_UNDERLINE - `(children) => { ... }`
 - MARK_CODE - `(children) => { ... }`
+- MARK_STYLED - `(children, { class }) => { ... }`
 - MARK_LINK - `(children, { href, target, linktype }) => { ... }`
 
 #### Example: Map bold elements to `<strong>`

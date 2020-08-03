@@ -17,6 +17,7 @@ export const MARK_STRIKE = 'strike';
 export const MARK_UNDERLINE = 'underline';
 export const MARK_CODE = 'code';
 export const MARK_LINK = 'link';
+export const MARK_STYLED = 'styled';
 
 export function render(document, options = {}) {
     if (
@@ -113,6 +114,9 @@ const linkMarkResolver = (children, { href, target, linktype }) => {
     return React.createElement('a', props, children);
 };
 
+const styledMarkResolver = (children, props) =>
+    React.createElement('span', { className: props.class }, children);
+
 const defaultNodeResolvers = {
     [NODE_HEADING]: headingNodeResolver,
     [NODE_CODEBLOCK]: codeblockNodeResolver,
@@ -128,6 +132,7 @@ const defaultNodeResolvers = {
 
 const defaultMarkResolvers = {
     [MARK_LINK]: linkMarkResolver,
+    [MARK_STYLED]: styledMarkResolver,
     [MARK_BOLD]: simpleMarkResolver('b'),
     [MARK_ITALIC]: simpleMarkResolver('i'),
     [MARK_STRIKE]: simpleMarkResolver('s'),
