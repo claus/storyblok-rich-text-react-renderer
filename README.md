@@ -65,6 +65,14 @@ render(document, {
 });
 ```
 
+Sensible [#defaults](default resolvers) for marks and nodes are provided
+out of the box. You only have to provide custom ones if you want to
+override the default behavior.
+
+If you use embedded Storyblok components, you have to provide
+[#blok-resolvers](blok resolvers) to map them to your React components though,
+otherwise they are ignored.
+
 ### Mark resolvers
 
 Mark resolvers are used to map inline elements.
@@ -73,13 +81,13 @@ Use the `markResolvers` option to add mark resolvers.
 
 Supported element types and their resolver function signatures are:
 
-- MARK_BOLD - `(children) => { ... }`
-- MARK_ITALIC - `(children) => { ... }`
-- MARK_STRIKE - `(children) => { ... }`
-- MARK_UNDERLINE - `(children) => { ... }`
-- MARK_CODE - `(children) => { ... }`
-- MARK_STYLED - `(children, { class }) => { ... }`
-- MARK_LINK - `(children, { href, target, linktype }) => { ... }`
+- MARK_BOLD — `(children) => { ... }`
+- MARK_ITALIC — `(children) => { ... }`
+- MARK_STRIKE — `(children) => { ... }`
+- MARK_UNDERLINE — `(children) => { ... }`
+- MARK_CODE — `(children) => { ... }`
+- MARK_STYLED — `(children, { class }) => { ... }`
+- MARK_LINK — `(children, { href, target, linktype }) => { ... }`
 
 #### Example: Map bold elements to `<strong>`
 
@@ -126,16 +134,16 @@ Use the `nodeResolvers` option to add node resolvers.
 
 Supported element types and their resolver function signatures are:
 
-- NODE_HEADING - `(children, { level }) => { ... }`
-- NODE_CODEBLOCK - `(children, { class }) => { ... }`
-- NODE_IMAGE - `(children, { src, alt, title }) => { ... }`
-- NODE_PARAGRAPH - `(children) => { ... }`
-- NODE_QUOTE - `(children) => { ... }`
-- NODE_OL - `(children) => { ... }`
-- NODE_UL - `(children) => { ... }`
-- NODE_LI - `(children) => { ... }`
-- NODE_HR - `() => { ... }`
-- NODE_BR - `() => { ... }`
+- NODE_HEADING — `(children, { level }) => { ... }`
+- NODE_CODEBLOCK — `(children, { class }) => { ... }`
+- NODE_IMAGE — `(children, { src, alt, title }) => { ... }`
+- NODE_PARAGRAPH — `(children) => { ... }`
+- NODE_QUOTE — `(children) => { ... }`
+- NODE_OL — `(children) => { ... }`
+- NODE_UL — `(children) => { ... }`
+- NODE_LI — `(children) => { ... }`
+- NODE_HR — `() => { ... }`
+- NODE_BR — `() => { ... }`
 
 #### Example: Map image elements to custom React components
 
@@ -168,3 +176,28 @@ render(document, {
     }
 });
 ```
+
+## Defaults
+
+Default mark resolvers:
+
+- MARK_BOLD — `<b> ... </b>`
+- MARK_ITALIC — `<i> ... </i>`
+- MARK_STRIKE — `<s> ... </s>`
+- MARK_UNDERLINE — `<u> ... </u>`
+- MARK_CODE — `<code> ... </code>`
+- MARK_STYLED — `<span className> ... </span>`
+- MARK_LINK — `<a href target> ... </a>`
+
+Default node resolvers:
+
+- NODE_HEADING — `<h1> ... </h1>` to `<h6> ... </h6>`
+- NODE_CODEBLOCK — `<pre><code className> ... </code></pre>`
+- NODE_IMAGE — `<img src alt title />`
+- NODE_PARAGRAPH — `<p> ... </p>`
+- NODE_QUOTE — `<blockquote> ... </blockquote>`
+- NODE_OL — `<ol> ... </ol>`
+- NODE_UL — `<ul> ... </ul>`
+- NODE_LI — `<li> ... </li>`
+- NODE_HR — `<hr />`
+- NODE_BR — `<br />`
