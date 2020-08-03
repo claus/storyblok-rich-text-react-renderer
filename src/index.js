@@ -52,7 +52,7 @@ export function render(document, options = {}) {
             const elements = nodes
                 ? nodes.map(renderNode).filter(node => node != null)
                 : null;
-            return Array.isArray(elements) && elements.length == 0
+            return Array.isArray(elements) && elements.length === 0
                 ? null
                 : elements;
         };
