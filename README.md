@@ -65,12 +65,12 @@ render(document, {
 });
 ```
 
-Sensible [#defaults](default resolvers) for marks and nodes are provided
+Sensible [default resolvers](#defaults) for marks and nodes are provided
 out of the box. You only have to provide custom ones if you want to
 override the default behavior.
 
 If you use embedded Storyblok components, you have to provide
-[#blok-resolvers](blok resolvers) to map them to your React components though,
+[blok resolvers](#blok-resolvers) to map them to your React components though,
 otherwise they are ignored.
 
 ### Mark resolvers
