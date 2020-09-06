@@ -177,6 +177,25 @@ render(document, {
 });
 ```
 
+### Default blok resolver
+
+Use the `defaultBlokResolver` option to add a default blok resolver. The function signature is `(name, props) => { ... }`, where `name` is the Storyblok component's "technical" name and `props` is an object that contains all the component's fields, as well as its `_uid` and `_editable` values.
+
+#### Example:
+
+```js
+import { render } from 'storyblok-rich-text-react-renderer';
+
+render(document, {
+    defaultBlokResolver: (name, props) => (
+        <div>
+            <code>Missing blok resolver for blok type "{name}".</code>
+            <pre><code>{JSON.stringify(props, undefined, 2)}</code></pre>
+        </div>
+    )
+});
+```
+
 ## Defaults
 
 Default mark resolvers:
