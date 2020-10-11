@@ -220,3 +220,10 @@ Default node resolvers:
 - NODE_LI — `<li> ... </li>`
 - NODE_HR — `<hr />`
 - NODE_BR — `<br />`
+
+## Changelog
+
+- 1.0.0 — Initial release
+- 1.1.0 — Add MARK_STYLED mark resolver
+- 1.2.0 — Add defaultBlockResolver
+- 2.0.0 — Rename defaultBlockResolver (typo) to defaultBlokResolver (⚠️ Breaking change ⚠️)

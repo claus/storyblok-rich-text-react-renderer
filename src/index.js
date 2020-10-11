@@ -27,7 +27,7 @@ export function render(document, options = {}) {
     ) {
         const {
             blokResolvers = {},
-            defaultBlockResolver = () => null,
+            defaultBlokResolver = () => null,
             nodeResolvers: customNodeResolvers = {},
             markResolvers: customMarkResolvers = {},
         } = options;
@@ -65,7 +65,7 @@ export function render(document, options = {}) {
                     const resolver = blokResolvers[component];
                     const element = resolver
                         ? resolver(props)
-                        : defaultBlockResolver(component, props);
+                        : defaultBlokResolver(component, props);
                     return addKey(element);
                 });
             } else if (node.type === 'text') {
