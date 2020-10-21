@@ -227,3 +227,4 @@ Default node resolvers:
 - 1.1.0 — Add MARK_STYLED mark resolver
 - 1.2.0 — Add defaultBlockResolver
 - 2.0.0 — Rename defaultBlockResolver (typo) to defaultBlokResolver (⚠️ Breaking change ⚠️)
+- 2.1.0 — Allow React 17 as peer
