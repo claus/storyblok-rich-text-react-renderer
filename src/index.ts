@@ -32,7 +32,7 @@ export type RenderOptionsProps = {
     [key in NODE_RESOLVERS]: (a?: ReactNode, b?: any) => ReactNode
   }
   markResolvers?: {
-    [key in MARK_RESOLVERS]: (a: any, b?: any) => ReactNode
+    [key in MARK_RESOLVERS]: (a?: ReactNode, b?: any) => ReactNode
   }
 }
 
