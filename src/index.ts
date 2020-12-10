@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 
-export enum NODE_RESOLVERS {
+export const enum NODE_RESOLVERS {
   NODE_HEADING = 'heading',
   NODE_CODEBLOCK = 'code_block',
   NODE_PARAGRAPH = 'paragraph',
@@ -13,7 +13,7 @@ export enum NODE_RESOLVERS {
   NODE_IMAGE = 'image'
 }
 
-enum MARK_RESOLVERS {
+export const enum MARK_RESOLVERS {
   MARK_BOLD = 'bold',
   MARK_ITALIC = 'italic',
   MARK_STRIKE = 'strike',
@@ -23,20 +23,23 @@ enum MARK_RESOLVERS {
   MARK_STYLED = 'styled'
 }
 
-export type RenderOptionsProps = {
+type NodeResolverType = {
+  [key in NODE_RESOLVERS]: (a?: ReactNode, b?: any) => ReactNode
+}
+type MarkResolverType = {
+  [key in MARK_RESOLVERS]: (a?: ReactNode, b?: any) => ReactNode
+}
+
+type RenderOptionsProps = {
   blokResolvers?: {
     [k: string]: (props: any) => ReactNode
   }
   defaultBlokResolver?: (name: string, props: any) => ReactNode
-  nodeResolvers?: {
-    [key in NODE_RESOLVERS]: (a?: ReactNode, b?: any) => ReactNode
-  }
-  markResolvers?: {
-    [key in MARK_RESOLVERS]: (a?: ReactNode, b?: any) => ReactNode
-  }
+  nodeResolvers?: Partial<NodeResolverType>
+  markResolvers?: Partial<MarkResolverType>
 }
 
-export function render(document: any, options: RenderOptionsProps = {}) {
+export const render = (document: any, options: RenderOptionsProps): ReactNode | null => {
   if (
     typeof document === 'object' &&
     document.type === 'doc' &&
@@ -47,7 +50,7 @@ export function render(document: any, options: RenderOptionsProps = {}) {
       defaultBlokResolver = () => null,
       nodeResolvers: customNodeResolvers = {},
       markResolvers: customMarkResolvers = {}
-    } = options
+    } = options ?? {}
 
     const nodeResolvers: any = {
       ...defaultNodeResolvers,
