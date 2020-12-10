@@ -4,11 +4,16 @@
   "version": "2.1.0",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
   "author": {
     "name": "Claus Wahlers",
     "email": "claus@codeazur.com.br"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/claus/storyblok-rich-text-react-renderer.git"
@@ -17,7 +22,8 @@
     "url": "https://github.com/claus/storyblok-rich-text-react-renderer/issues"
   },
   "scripts": {
-    "build": "rollup -c",
+    "start": "rimraf dist && microbundle watch",
+    "build": "rimraf dist && microbundle -f modern,esm,cjs --jsx React.createElement",
     "prepare": "npm run build"
   },
   "keywords": [
@@ -32,13 +38,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
-    "@babel/plugin-transform-arrow-functions": "^7.10.4",
-    "@babel/plugin-transform-destructuring": "^7.10.4",
-    "@rollup/plugin-babel": "^5.1.0",
-    "@rollup/plugin-commonjs": "^14.0.0",
-    "rollup": "^2.23.0",
-    "rollup-plugin-peer-deps-external": "^2.2.3"
+    "@types/react": "^17.0.0",
+    "microbundle": "^0.12.4",
+    "react": "^17.0.1",
+    "typescript": "^4.1.2"
   }
 }
