@@ -65,22 +65,26 @@ export function render(document, options = {}) {
                     const resolver = blokResolvers[component];
                     const element = resolver
                         ? resolver(props)
-                        : defaultBlokResolver(component, props);
+                        : defaultBlockResolver(component, props);
                     return addKey(element);
                 });
-            } else if (node.type === 'text') {
+            } else {
+                let childNode;
+                if (node.type === 'text') {
+                    childNode = node.text;
+                } else {
+                    const resolver = nodeResolvers[node.type];
+                    childNode = resolver
+                        ? addKey(resolver(renderNodes(node.content), node.attrs))
+                        : null;
+                }
                 const marks = node.marks ?? [];
                 return marks.reduceRight((children, mark) => {
                     const resolver = markResolvers[mark.type];
                     return resolver
                         ? addKey(resolver(children, mark.attrs))
                         : children;
-                }, node.text);
-            } else {
-                const resolver = nodeResolvers[node.type];
-                return resolver
-                    ? addKey(resolver(renderNodes(node.content), node.attrs))
-                    : null;
+                }, childNode);
             }
         };
 
