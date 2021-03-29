@@ -61,7 +61,9 @@ via the optional second argument of the `render` function:
 render(document, {
     markResolvers: { ... }, // inline elements
     nodeResolvers: { ... }, // block elements
-    blokResolvers: { ... } // embedded components
+    blokResolvers: { ... }, // embedded components
+    defaultBlokResolver: (name, props) => ( ... ),
+    defaultStringResolver: (str) => ( ... ),
 });
 ```
 
@@ -71,7 +73,9 @@ override the default behavior.
 
 If you use embedded Storyblok components, you have to provide
 [blok resolvers](#blok-resolvers) to map them to your React components though,
-otherwise they are ignored.
+otherwise they are ignored. You can also provide a
+[default blok resolver](#default-blok-resolver) if you need a catch-all
+solution.
 
 ### Mark resolvers
 
@@ -180,6 +184,10 @@ render(document, {
 ### Default blok resolver
 
 Use the `defaultBlokResolver` option to add a default blok resolver. The function signature is `(name, props) => { ... }`, where `name` is the Storyblok component's "technical" name and `props` is an object that contains all the component's fields, as well as its `_uid` and `_editable` values.
+
+### Default string resolver
+
+Storyblok might return a simple string instead of a document object for rich text fields with trivial content. By default, the render function returns this string as-is. Use the `defaultStringResolver` option to customize this behavior. The function signature is `(str) => { ... }`.
 
 #### Example:
 

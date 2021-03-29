@@ -89,6 +89,9 @@ export function render(document, options = {}) {
         };
 
         return renderNodes(document.content);
+    } else if (typeof document === 'string') {
+        const { defaultStringResolver = str => str } = options;
+        return defaultStringResolver(document);
     }
     return null;
 }
