@@ -185,10 +185,6 @@ render(document, {
 
 Use the `defaultBlokResolver` option to add a default blok resolver. The function signature is `(name, props) => { ... }`, where `name` is the Storyblok component's "technical" name and `props` is an object that contains all the component's fields, as well as its `_uid` and `_editable` values.
 
-### Default string resolver
-
-Storyblok might return a simple string instead of a document object for rich text fields with trivial content. By default, the render function returns this string as-is. Use the `defaultStringResolver` option to customize this behavior. The function signature is `(str) => { ... }`.
-
 #### Example:
 
 ```js
@@ -201,6 +197,20 @@ render(document, {
             <pre><code>{JSON.stringify(props, undefined, 2)}</code></pre>
         </div>
     )
+});
+```
+
+### Default string resolver
+
+Storyblok might return a simple string instead of a document object for rich text fields with trivial content. By default, the render function returns this string as-is. Use the `defaultStringResolver` option to customize this behavior. The function signature is `(str) => { ... }`.
+
+#### Example:
+
+```js
+import { render } from 'storyblok-rich-text-react-renderer';
+
+render(document, {
+    defaultStringResolver: (str) => (<p>{str}</p>)
 });
 ```
 
