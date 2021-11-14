@@ -210,7 +210,7 @@ Storyblok might return a simple string instead of a document object for rich tex
 import { render } from 'storyblok-rich-text-react-renderer';
 
 render(document, {
-    defaultStringResolver: (str) => (<p>{str}</p>)
+    defaultStringResolver: (str) => <p>{str}</p>
 });
 ```
 
@@ -249,3 +249,4 @@ Default node resolvers:
 - 2.1.1 — Allow block elements as children of inline elements (in particular linked images)
 - 2.2.0 — Bugfix: Code was still referring to defaultBlockResolver (see 2.0.0)
 - 2.3.0 — Add defaultStringResolver, allow plain string as input
+- 2.4.0 — Add TypeScript type definitions (index.d.ts)
