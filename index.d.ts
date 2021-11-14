@@ -1,0 +1,127 @@
+declare module 'storyblok-rich-text-react-renderer' {
+  import { ReactNode } from 'react'
+
+  type StoryblokRichtextContentType =
+    | 'heading'
+    | 'code_block'
+    | 'paragraph'
+    | 'blockquote'
+    | 'ordered_list'
+    | 'bullet_list'
+    | 'list_item'
+    | 'horizontal_rule'
+    | 'hard_break'
+    | 'image'
+    | 'blok'
+
+  type StoryblokRichtextMark =
+    | 'bold'
+    | 'italic'
+    | 'strike'
+    | 'underline'
+    | 'code'
+    | 'link'
+    | 'styled'
+
+  type StoryblokRichtextContent = {
+    type: StoryblokRichtextContentType
+    attrs?: {
+      level?: number
+      class?: string
+      src?: string
+      alt?: string
+      order?: number
+      body?: Array<{
+        _uid: string
+        Text: string
+        component: 'dia-tip'
+      }>
+    }
+    marks?: {
+      type: StoryblokRichtextMark
+      attrs?: {
+        href?: string
+        target?: string
+      }
+    }[]
+    text?: string
+    content: StoryblokRichtextContent[]
+  }
+
+  type StoryblokRichtext = {
+    type: 'doc'
+    content: StoryblokRichtextContent[]
+  }
+
+  export const NODE_HEADING = 'heading'
+  export const NODE_CODEBLOCK = 'code_block'
+  export const NODE_PARAGRAPH = 'paragraph'
+  export const NODE_QUOTE = 'blockquote'
+  export const NODE_OL = 'ordered_list'
+  export const NODE_UL = 'bullet_list'
+  export const NODE_LI = 'list_item'
+  export const NODE_HR = 'horizontal_rule'
+  export const NODE_BR = 'hard_break'
+  export const NODE_IMAGE = 'image'
+
+  export const MARK_BOLD = 'bold'
+  export const MARK_ITALIC = 'italic'
+  export const MARK_STRIKE = 'strike'
+  export const MARK_UNDERLINE = 'underline'
+  export const MARK_CODE = 'code'
+  export const MARK_LINK = 'link'
+  export const MARK_STYLED = 'styled'
+
+  export function render(
+    document: StoryblokRichtext | unknown,
+    options?: {
+      blokResolvers?: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [key: string]: (props: any) => JSX.Element | null
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      defaultBlokResolver?: (name: string, props: any) => JSX.Element | null
+      markResolvers?: {
+        [MARK_BOLD]?: (children: ReactNode) => JSX.Element | null
+        [MARK_CODE]?: (children: ReactNode) => JSX.Element | null
+        [MARK_ITALIC]?: (children: ReactNode) => JSX.Element | null
+        [MARK_LINK]?: (
+          children: ReactNode,
+          props: { href?: string; target?: string; linktype?: string }
+        ) => JSX.Element | null
+        [MARK_STRIKE]?: (children: ReactNode) => JSX.Element | null
+        [MARK_STYLED]?: (
+          children: ReactNode,
+          props: { class?: string }
+        ) => JSX.Element | null
+        [MARK_UNDERLINE]?: (children: ReactNode) => JSX.Element | null
+      }
+      nodeResolvers?: {
+        [NODE_BR]?: () => JSX.Element | null
+        [NODE_CODEBLOCK]?: (
+          children: ReactNode,
+          props: { class: string }
+        ) => JSX.Element | null
+        [NODE_HEADING]?: (
+          children: ReactNode,
+          props: { level: number }
+        ) => JSX.Element | null
+        [NODE_HR]?: () => JSX.Element | null
+        [NODE_IMAGE]?: (
+          children: ReactNode,
+          props: {
+            alt?: string
+            title?: string
+            src?: string
+          }
+        ) => JSX.Element | null
+        [NODE_LI]?: (children: ReactNode) => JSX.Element | null
+        [NODE_OL]?: (children: ReactNode) => JSX.Element | null
+        [NODE_PARAGRAPH]?: (children: ReactNode) => JSX.Element | null
+        [NODE_QUOTE]?: (children: ReactNode) => JSX.Element | null
+        [NODE_UL]?: (children: ReactNode) => JSX.Element | null
+      }
+      defaultStringResolver?: (str: string) => JSX.Element
+    }
+  )
+}
