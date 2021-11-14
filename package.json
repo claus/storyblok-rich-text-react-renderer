@@ -41,4 +41,5 @@
     "rollup": "^2.44.0",
     "rollup-plugin-peer-deps-external": "^2.2.4"
   }
+  "types": "./index.d.ts"
 }
