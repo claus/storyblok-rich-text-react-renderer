@@ -64,6 +64,7 @@ render(document, {
     blokResolvers: { ... }, // embedded components
     defaultBlokResolver: (name, props) => ( ... ),
     defaultStringResolver: (str) => ( ... ),
+    textResolver: (text) => ( ... ),
 });
 ```
 
@@ -214,6 +215,21 @@ render(document, {
 });
 ```
 
+### Text resolver
+
+Use the `textResolver` option to add a resolver for plain text nodes. The function signature is `(text) => { ... }`.
+
+#### Example:
+
+```js
+import { render } from 'storyblok-rich-text-react-renderer';
+import entities from 'entities';
+
+render(document, {
+    textResolver: (text) => entities.decodeHTML(text)
+});
+```
+
 ## Defaults
 
 Default mark resolvers:
@@ -250,3 +266,4 @@ Default node resolvers:
 - 2.2.0 — Bugfix: Code was still referring to defaultBlockResolver (see 2.0.0)
 - 2.3.0 — Add defaultStringResolver, allow plain string as input
 - 2.4.0 — Add TypeScript type definitions (index.d.ts)
+- 2.5.0 — Add textResolver

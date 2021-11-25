@@ -30,6 +30,7 @@ export function render(document, options = {}) {
             defaultBlokResolver = () => null,
             nodeResolvers: customNodeResolvers = {},
             markResolvers: customMarkResolvers = {},
+            textResolver = str => str,
         } = options;
 
         const nodeResolvers = {
@@ -71,7 +72,7 @@ export function render(document, options = {}) {
             } else {
                 let childNode;
                 if (node.type === 'text') {
-                    childNode = node.text;
+                    childNode = textResolver(node.text);
                 } else {
                     const resolver = nodeResolvers[node.type];
                     childNode = resolver
@@ -90,8 +91,11 @@ export function render(document, options = {}) {
 
         return renderNodes(document.content);
     } else if (typeof document === 'string') {
-        const { defaultStringResolver = str => str } = options;
-        return defaultStringResolver(document);
+        const {
+          defaultStringResolver = (str) => str,
+          textResolver = (str) => str,
+        } = options;
+        return defaultStringResolver(textResolver(document));
     }
     return null;
 }
