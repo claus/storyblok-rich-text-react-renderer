@@ -122,6 +122,7 @@ declare module 'storyblok-rich-text-react-renderer' {
         [NODE_UL]?: (children: ReactNode) => JSX.Element | null
       }
       defaultStringResolver?: (str: string) => JSX.Element
+      textResolver?: (str: string) => string
     }
   )
 }

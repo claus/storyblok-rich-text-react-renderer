@@ -1,7 +1,7 @@
 {
   "name": "storyblok-rich-text-react-renderer",
   "description": "A React renderer for Storyblok rich text content",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
