@@ -72,7 +72,7 @@ declare module "storyblok-rich-text-react-renderer" {
   export const MARK_LINK = "link";
   export const MARK_STYLED = "styled";
 
-  export type RenderOptions = {
+  export interface RenderOptions {
     blokResolvers?: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       [key: string]: (props: any) => JSX.Element | null;
