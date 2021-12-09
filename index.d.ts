@@ -74,11 +74,9 @@ declare module "storyblok-rich-text-react-renderer" {
 
   export interface RenderOptions {
     blokResolvers?: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      [key: string]: (props: any) => JSX.Element | null;
+      [key: string]: (props: Record<string, unknown>) => JSX.Element | null;
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    defaultBlokResolver?: (name: string, props: any) => JSX.Element | null;
+    defaultBlokResolver?: (name: string, props: Record<string, unknown>) => JSX.Element | null;
     markResolvers?: {
       [MARK_BOLD]?: (children: ReactNode) => JSX.Element | null;
       [MARK_CODE]?: (children: ReactNode) => JSX.Element | null;
