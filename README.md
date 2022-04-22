@@ -31,7 +31,7 @@ rich text elements to React components, e.g.:
 2. Links that you might want to pass through your app's router
 
 Instead of HTML markup, `storyblok-rich-text-react-renderer` outputs
-React elements, and provides options to map any Stoyblok rich text
+React elements, and provides options to map any Storyblok rich text
 element to custom React components.
 
 ## Installation
