@@ -100,7 +100,7 @@ declare module "storyblok-rich-text-react-renderer" {
       ) => JSX.Element | null;
       [NODE_HEADING]?: (
         children: ReactNode,
-        props: { level: number }
+        props: { level: 1 | 2 | 3 | 4 | 5 | 6 }
       ) => JSX.Element | null;
       [NODE_HR]?: () => JSX.Element | null;
       [NODE_IMAGE]?: (
