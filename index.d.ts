@@ -43,6 +43,7 @@ declare module "storyblok-rich-text-react-renderer" {
         href?: string;
         target?: string;
         anchor?: string;
+        uuid?: string;
       };
     }[];
     text?: string;
@@ -84,7 +85,13 @@ declare module "storyblok-rich-text-react-renderer" {
       [MARK_ITALIC]?: (children: ReactNode) => JSX.Element | null;
       [MARK_LINK]?: (
         children: ReactNode,
-        props: { href?: string; target?: string; linktype?: string, anchor?: string }
+        props: {
+          linktype?: string;
+          href?: string;
+          target?: string;
+          anchor?: string;
+          uuid?: string;
+        }
       ) => JSX.Element | null;
       [MARK_STRIKE]?: (children: ReactNode) => JSX.Element | null;
       [MARK_STYLED]?: (
