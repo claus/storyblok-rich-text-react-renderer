@@ -30,20 +30,21 @@ declare module "storyblok-rich-text-react-renderer" {
       class?: string;
       src?: string;
       alt?: string;
+      title?: string;
       order?: number;
       body?: Array<{
         _uid: string;
-        Text: string;
-        component: "dia-tip";
       }>;
     };
     marks?: {
       type: StoryblokRichtextMark;
       attrs?: {
+        linktype?: string;
         href?: string;
         target?: string;
         anchor?: string;
         uuid?: string;
+        class?: string;
       };
     }[];
     text?: string;
@@ -78,11 +79,16 @@ declare module "storyblok-rich-text-react-renderer" {
     blokResolvers?: {
       [key: string]: (props: Record<string, unknown>) => JSX.Element | null;
     };
-    defaultBlokResolver?: (name: string, props: Record<string, unknown>) => JSX.Element | null;
+    defaultBlokResolver?: (
+      name: string,
+      props: Record<string, unknown>
+    ) => JSX.Element | null;
     markResolvers?: {
       [MARK_BOLD]?: (children: ReactNode) => JSX.Element | null;
       [MARK_CODE]?: (children: ReactNode) => JSX.Element | null;
       [MARK_ITALIC]?: (children: ReactNode) => JSX.Element | null;
+      [MARK_STRIKE]?: (children: ReactNode) => JSX.Element | null;
+      [MARK_UNDERLINE]?: (children: ReactNode) => JSX.Element | null;
       [MARK_LINK]?: (
         children: ReactNode,
         props: {
@@ -93,12 +99,10 @@ declare module "storyblok-rich-text-react-renderer" {
           uuid?: string;
         }
       ) => JSX.Element | null;
-      [MARK_STRIKE]?: (children: ReactNode) => JSX.Element | null;
       [MARK_STYLED]?: (
         children: ReactNode,
         props: { class?: string }
       ) => JSX.Element | null;
-      [MARK_UNDERLINE]?: (children: ReactNode) => JSX.Element | null;
     };
     nodeResolvers?: {
       [NODE_BR]?: () => JSX.Element | null;
@@ -127,7 +131,7 @@ declare module "storyblok-rich-text-react-renderer" {
     };
     defaultStringResolver?: (str: string) => JSX.Element;
     textResolver?: (str: string) => string;
-  };
+  }
 
   export function render(
     document: StoryblokRichtext | unknown,
