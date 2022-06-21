@@ -121,10 +121,11 @@ const codeblockNodeResolver = (children, props) => {
 const simpleMarkResolver = element => children =>
     React.createElement(element, null, children);
 
-const linkMarkResolver = (children, { href, target, linktype }) => {
+const linkMarkResolver = (children, { href, target, linktype, anchor }) => {
     const props = {
         href: linktype === 'email' ? `mailto:${href}` : href,
         target,
+        anchor
     };
     return React.createElement('a', props, children);
 };

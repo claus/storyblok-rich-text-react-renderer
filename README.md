@@ -92,7 +92,7 @@ Supported element types and their resolver function signatures are:
 - MARK_UNDERLINE — `(children) => { ... }`
 - MARK_CODE — `(children) => { ... }`
 - MARK_STYLED — `(children, { class }) => { ... }`
-- MARK_LINK — `(children, { href, target, linktype }) => { ... }`
+- MARK_LINK — `(children, { href, target, linktype, anchor }) => { ... }`
 
 #### Example: Map bold elements to `<strong>`
 
@@ -115,7 +115,7 @@ import { render, MARK_LINK } from 'storyblok-rich-text-react-renderer';
 render(document, {
     markResolvers: {
         [MARK_LINK]: (children, props) => {
-            const { href, target, linktype } = props;
+            const { href, target, linktype, anchor } = props;
             if (linktype === 'email') {
                 // Email links: add `mailto:` scheme and map to <a>
                 return <a href={`mailto:${href}`}>{children}</a>;
