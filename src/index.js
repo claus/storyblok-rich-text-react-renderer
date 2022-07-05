@@ -100,8 +100,7 @@ export function render(document, options = {}) {
     return null;
 }
 
-const simpleNodeResolver = element => children =>
-    children != null ? React.createElement(element, null, children) : null;
+const simpleNodeResolver = element => children => React.createElement(element, null, children ?? '');
 
 const emptyNodeResolver = element => () =>
     React.createElement(element);
