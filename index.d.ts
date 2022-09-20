@@ -1,7 +1,7 @@
 declare module "storyblok-rich-text-react-renderer" {
   import { ReactNode } from "react";
 
-  type StoryblokRichtextContentType =
+  export type StoryblokRichtextContentType =
     | "heading"
     | "code_block"
     | "paragraph"
@@ -14,7 +14,7 @@ declare module "storyblok-rich-text-react-renderer" {
     | "image"
     | "blok";
 
-  type StoryblokRichtextMark =
+  export type StoryblokRichtextMark =
     | "bold"
     | "italic"
     | "strike"
@@ -23,7 +23,7 @@ declare module "storyblok-rich-text-react-renderer" {
     | "link"
     | "styled";
 
-  type StoryblokRichtextContent = {
+  export type StoryblokRichtextContent = {
     type: StoryblokRichtextContentType;
     attrs?: {
       level?: number;
@@ -51,7 +51,7 @@ declare module "storyblok-rich-text-react-renderer" {
     content: StoryblokRichtextContent[];
   };
 
-  type StoryblokRichtext = {
+  export type StoryblokRichtext = {
     type: "doc";
     content: StoryblokRichtextContent[];
   };
