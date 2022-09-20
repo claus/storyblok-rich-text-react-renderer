@@ -81,7 +81,7 @@ declare module "storyblok-rich-text-react-renderer" {
     };
     defaultBlokResolver?: (
       name: string,
-      props: Record<string, unknown>
+      props: Record<string, unknown> & { _uid: string }
     ) => JSX.Element | null;
     markResolvers?: {
       [MARK_BOLD]?: (children: ReactNode) => JSX.Element | null;
