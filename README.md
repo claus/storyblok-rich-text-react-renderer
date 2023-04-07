@@ -241,6 +241,8 @@ Default mark resolvers:
 - MARK_CODE — `<code> ... </code>`
 - MARK_STYLED — `<span className> ... </span>`
 - MARK_LINK — `<a href target> ... </a>`
+- MARK_SUBSCRIPT - `<sub> ... </sub>`
+- MARK_SUPERSCRIPT - `<sup> ... </sup>`
 
 Default node resolvers:
 

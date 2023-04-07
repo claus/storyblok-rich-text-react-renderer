@@ -21,7 +21,11 @@ declare module "storyblok-rich-text-react-renderer" {
     | "underline"
     | "code"
     | "link"
-    | "styled";
+    | "styled"
+    | "subscript"
+    | "superscript"
+    | "textStyle"
+    | "highlight";
 
   export type StoryblokRichtextContent = {
     type: StoryblokRichtextContentType;
@@ -74,6 +78,10 @@ declare module "storyblok-rich-text-react-renderer" {
   export const MARK_CODE = "code";
   export const MARK_LINK = "link";
   export const MARK_STYLED = "styled";
+  export const MARK_SUBSCRIPT = "subscript";
+  export const MARK_SUPERSCRIPT = "superscript";
+  export const MARK_TEXT_STYLE = "textStyle";
+  export const MARK_HIGHLIGHT = "highlight";
 
   export interface RenderOptions {
     blokResolvers?: {
@@ -102,6 +110,16 @@ declare module "storyblok-rich-text-react-renderer" {
       [MARK_STYLED]?: (
         children: ReactNode,
         props: { class?: string }
+      ) => JSX.Element | null;
+      [MARK_SUBSCRIPT]?: (children: ReactNode) => JSX.Element | null;
+      [MARK_SUPERSCRIPT]?: (children: ReactNode) => JSX.Element | null;
+      [MARK_TEXT_STYLE]?: (
+        children: ReactNode,
+        props: { color?: string; }
+      ) => JSX.Element | null;
+      [MARK_HIGHLIGHT]?: (
+        children: ReactNode,
+        props: { color?: string; }
       ) => JSX.Element | null;
     };
     nodeResolvers?: {

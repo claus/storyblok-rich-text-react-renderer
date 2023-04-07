@@ -18,6 +18,10 @@ export const MARK_UNDERLINE = 'underline';
 export const MARK_CODE = 'code';
 export const MARK_LINK = 'link';
 export const MARK_STYLED = 'styled';
+export const MARK_SUBSCRIPT = "subscript";
+export const MARK_SUPERSCRIPT = "superscript";
+export const MARK_TEXT_STYLE = "textStyle";
+export const MARK_HIGHLIGHT = "highlight";
 
 export function render(document, options = {}) {
     if (
@@ -132,6 +136,9 @@ const linkMarkResolver = (children, { linktype, href, target }) => {
 const styledMarkResolver = (children, props) =>
     React.createElement('span', { className: props.class }, children);
 
+const textStyledMarkResolver = (children, props) =>
+    React.createElement('span', { style: props.color }, children);
+
 const defaultNodeResolvers = {
     [NODE_HEADING]: headingNodeResolver,
     [NODE_CODEBLOCK]: codeblockNodeResolver,
@@ -153,4 +160,8 @@ const defaultMarkResolvers = {
     [MARK_STRIKE]: simpleMarkResolver('s'),
     [MARK_UNDERLINE]: simpleMarkResolver('u'),
     [MARK_CODE]: simpleMarkResolver('code'),
+    [MARK_SUBSCRIPT]: simpleMarkResolver('sub'),
+    [MARK_SUPERSCRIPT]: simpleMarkResolver('sup'),
+    [MARK_TEXT_STYLE]: textStyledMarkResolver,
+    [MARK_HIGHLIGHT]: textStyledMarkResolver,
 };
