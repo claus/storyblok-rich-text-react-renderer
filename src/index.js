@@ -137,7 +137,7 @@ const styledMarkResolver = (children, props) =>
     React.createElement('span', { className: props.class }, children);
 
 const textStyledMarkResolver = (children, props) =>
-    React.createElement('span', { style: props.color }, children);
+    React.createElement('span', { style: { color: props.color } }, children);
 
 const defaultNodeResolvers = {
     [NODE_HEADING]: headingNodeResolver,
