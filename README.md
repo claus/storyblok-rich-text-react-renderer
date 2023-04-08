@@ -129,7 +129,7 @@ render(document, {
                 return <a href={href} target={target}>{children}</a>;
             }
             // Internal links: map to <Link>
-            return <Link href={href}><a>{children}</a></Link>;
+            return <Link href={href}>{children}</Link>;
         }
     }
 });
