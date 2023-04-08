@@ -206,7 +206,7 @@ render(document, {
 });
 ```
 
-Alternatively, you can use `StoryblokComponent` from [https://github.com/storyblok/storyblok-react](@storyblok/react).
+Alternatively, you can use `StoryblokComponent` from [@storyblok/react](https://github.com/storyblok/storyblok-react).
 
 #### Example:
 
