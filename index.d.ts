@@ -12,6 +12,7 @@ declare module "storyblok-rich-text-react-renderer" {
     | "horizontal_rule"
     | "hard_break"
     | "image"
+    | "emoji"
     | "blok";
 
   export type StoryblokRichtextMark =
@@ -21,7 +22,11 @@ declare module "storyblok-rich-text-react-renderer" {
     | "underline"
     | "code"
     | "link"
-    | "styled";
+    | "styled"
+    | "subscript"
+    | "superscript"
+    | "highlight"
+    | "textStyle";
 
   export type StoryblokRichtextContent = {
     type: StoryblokRichtextContentType;
@@ -45,6 +50,7 @@ declare module "storyblok-rich-text-react-renderer" {
         anchor?: string;
         uuid?: string;
         class?: string;
+        color?: string;
       };
     }[];
     text?: string;
@@ -66,6 +72,7 @@ declare module "storyblok-rich-text-react-renderer" {
   export const NODE_HR = "horizontal_rule";
   export const NODE_BR = "hard_break";
   export const NODE_IMAGE = "image";
+  export const NODE_EMOJI = 'emoji';
 
   export const MARK_BOLD = "bold";
   export const MARK_ITALIC = "italic";
@@ -74,6 +81,10 @@ declare module "storyblok-rich-text-react-renderer" {
   export const MARK_CODE = "code";
   export const MARK_LINK = "link";
   export const MARK_STYLED = "styled";
+  export const MARK_SUBSCRIPT = 'subscript';
+  export const MARK_SUPERSCRIPT = 'superscript';
+  export const MARK_HIGHLIGHT = 'highlight';
+  export const MARK_TEXT_STYLE = 'textStyle';
 
   export interface RenderOptions {
     blokResolvers?: {
@@ -89,6 +100,8 @@ declare module "storyblok-rich-text-react-renderer" {
       [MARK_ITALIC]?: (children: ReactNode) => JSX.Element | null;
       [MARK_STRIKE]?: (children: ReactNode) => JSX.Element | null;
       [MARK_UNDERLINE]?: (children: ReactNode) => JSX.Element | null;
+      [MARK_SUBSCRIPT]?: (children: ReactNode) => JSX.Element | null;
+      [MARK_SUPERSCRIPT]?: (children: ReactNode) => JSX.Element | null;
       [MARK_LINK]?: (
         children: ReactNode,
         props: {
@@ -102,6 +115,14 @@ declare module "storyblok-rich-text-react-renderer" {
       [MARK_STYLED]?: (
         children: ReactNode,
         props: { class?: string }
+      ) => JSX.Element | null;
+      [MARK_HIGHLIGHT]?: (
+        children: ReactNode,
+        props: { color?: string }
+      ) => JSX.Element | null;
+      [MARK_TEXT_STYLE]?: (
+        children: ReactNode,
+        props: { color?: string }
       ) => JSX.Element | null;
     };
     nodeResolvers?: {
@@ -121,6 +142,14 @@ declare module "storyblok-rich-text-react-renderer" {
           alt?: string;
           title?: string;
           src?: string;
+        }
+      ) => JSX.Element | null;
+      [NODE_EMOJI]?: (
+        children: ReactNode,
+        props: {
+          name?: string;
+          emoji?: string;
+          fallbackImage?: string;
         }
       ) => JSX.Element | null;
       [NODE_LI]?: (children: ReactNode) => JSX.Element | null;

@@ -93,6 +93,10 @@ Supported element types and their resolver function signatures are:
 - MARK_CODE — `(children) => { ... }`
 - MARK_STYLED — `(children, { class }) => { ... }`
 - MARK_LINK — `(children, { linktype, href, target, anchor, uuid }) => { ... }`
+- MARK_SUBSCRIPT — `(children) => { ... }`
+- MARK_SUPERSCRIPT — `(children) => { ... }`
+- MARK_HIGHLIGHT — `(children, { color }) => { ... }`
+- MARK_TEXT_STYLE — `(children, { color }) => { ... }`
 
 #### Example: Map bold elements to `<strong>`
 
@@ -142,6 +146,7 @@ Supported element types and their resolver function signatures are:
 - NODE_HEADING — `(children, { level }) => { ... }`
 - NODE_CODEBLOCK — `(children, { class }) => { ... }`
 - NODE_IMAGE — `(children, { src, alt, title }) => { ... }`
+- NODE_EMOJI — `(children, { name, emoji, fallbackImage }) => { ... }`
 - NODE_PARAGRAPH — `(children) => { ... }`
 - NODE_QUOTE — `(children) => { ... }`
 - NODE_OL — `(children) => { ... }`
@@ -201,6 +206,22 @@ render(document, {
 });
 ```
 
+Alternatively, you can use `StoryblokComponent` from [https://github.com/storyblok/storyblok-react](@storyblok/react).
+
+#### Example:
+
+```js
+import { render } from 'storyblok-rich-text-react-renderer';
+import { StoryblokComponent } from "@storyblok/react";
+
+render(document, {
+    defaultBlokResolver: (name, props) => {
+        const blok = { ...props, component: name };
+        return <StoryblokComponent blok={blok} key={props._uid} />;
+    }
+});
+```
+
 ### Default string resolver
 
 Storyblok might return a simple string instead of a document object for rich text fields with trivial content. By default, the render function returns this string as-is. Use the `defaultStringResolver` option to customize this behavior. The function signature is `(str) => { ... }`.
@@ -241,12 +262,17 @@ Default mark resolvers:
 - MARK_CODE — `<code> ... </code>`
 - MARK_STYLED — `<span className> ... </span>`
 - MARK_LINK — `<a href target> ... </a>`
+- MARK_SUBSTRING — `<sub> ... </sub>`
+- MARK_SUPERSTRING — `<sup> ... </sup>`
+- MARK_HIGHLIGHT — `<span style> ... </span>`
+- MARK_TEXT_STYLE — `<span style> ... </span>`
 
 Default node resolvers:
 
 - NODE_HEADING — `<h1> ... </h1>` to `<h6> ... </h6>`
 - NODE_CODEBLOCK — `<pre><code className> ... </code></pre>`
 - NODE_IMAGE — `<img src alt title />`
+- NODE_EMOJI — `<span data-type data-name emoji> ... </span>`
 - NODE_PARAGRAPH — `<p> ... </p>`
 - NODE_QUOTE — `<blockquote> ... </blockquote>`
 - NODE_OL — `<ol> ... </ol>`
@@ -267,3 +293,4 @@ Default node resolvers:
 - 2.3.0 — Add defaultStringResolver, allow plain string as input
 - 2.4.0 — Add TypeScript type definitions (index.d.ts)
 - 2.5.0 — Add textResolver
+- 2.7.0 — Add NODE_EMOJI, MARK_SUBSTRING, MARK_SUPERSTRING, MARK_HIGHLIGHT and MARK_TEXT_STYLE resolvers

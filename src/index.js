@@ -10,6 +10,7 @@ export const NODE_LI = 'list_item';
 export const NODE_HR = 'horizontal_rule';
 export const NODE_BR = 'hard_break';
 export const NODE_IMAGE = 'image';
+export const NODE_EMOJI = 'emoji';
 
 export const MARK_BOLD = 'bold';
 export const MARK_ITALIC = 'italic';
@@ -18,6 +19,10 @@ export const MARK_UNDERLINE = 'underline';
 export const MARK_CODE = 'code';
 export const MARK_LINK = 'link';
 export const MARK_STYLED = 'styled';
+export const MARK_SUBSCRIPT = 'subscript';
+export const MARK_SUPERSCRIPT = 'superscript';
+export const MARK_HIGHLIGHT = 'highlight';
+export const MARK_TEXT_STYLE = 'textStyle';
 
 export function render(document, options = {}) {
     if (
@@ -118,6 +123,27 @@ const codeblockNodeResolver = (children, props) => {
     return React.createElement('pre', null, code);
 };
 
+const emojiNodeResolver = (_, { name, emoji, fallbackImage }) => {
+    const props = {
+        'data-type': 'emoji',
+        'data-name': name,
+        emoji
+    }
+    if (emoji || !fallbackImage) {
+        return React.createElement('span', props, emoji);
+    } else {
+        const fallbackProps = {
+            src: fallbackImage,
+            draggable: 'false',
+            loading: 'lazy',
+            align: 'absmiddle',
+            alt: name,
+        };
+        const fallback = React.createElement('img', fallbackProps);
+        return React.createElement('span', props, fallback);
+    }
+};
+
 const simpleMarkResolver = element => children =>
     React.createElement(element, null, children);
 
@@ -132,6 +158,20 @@ const linkMarkResolver = (children, { linktype, href, target }) => {
 const styledMarkResolver = (children, props) =>
     React.createElement('span', { className: props.class }, children);
 
+const highlightMarkResolver = (children, { color }) => {
+    const props = {
+      style: { backgroundColor: color },
+    };
+    return React.createElement('span', props, children);
+}
+
+const textStyleMarkResolver = (children, { color }) => {
+    const props = {
+      style: { color },
+    };
+    return React.createElement('span', props, children);
+}
+
 const defaultNodeResolvers = {
     [NODE_HEADING]: headingNodeResolver,
     [NODE_CODEBLOCK]: codeblockNodeResolver,
@@ -143,6 +183,7 @@ const defaultNodeResolvers = {
     [NODE_LI]: simpleNodeResolver('li'),
     [NODE_HR]: emptyNodeResolver('hr'),
     [NODE_BR]: emptyNodeResolver('br'),
+    [NODE_EMOJI]: emojiNodeResolver,
 };
 
 const defaultMarkResolvers = {
@@ -153,4 +194,8 @@ const defaultMarkResolvers = {
     [MARK_STRIKE]: simpleMarkResolver('s'),
     [MARK_UNDERLINE]: simpleMarkResolver('u'),
     [MARK_CODE]: simpleMarkResolver('code'),
+    [MARK_SUBSCRIPT]: simpleMarkResolver('sub'),
+    [MARK_SUPERSCRIPT]: simpleMarkResolver('sup'),
+    [MARK_HIGHLIGHT]: highlightMarkResolver,
+    [MARK_TEXT_STYLE]: textStyleMarkResolver,
 };
