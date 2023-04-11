@@ -13,7 +13,8 @@ declare module "storyblok-rich-text-react-renderer" {
     | "hard_break"
     | "image"
     | "emoji"
-    | "blok";
+    | "blok"
+    | "text";
 
   export type StoryblokRichtextMark =
     | "bold"
@@ -54,7 +55,7 @@ declare module "storyblok-rich-text-react-renderer" {
       };
     }[];
     text?: string;
-    content: StoryblokRichtextContent[];
+    content?: StoryblokRichtextContent[];
   };
 
   export type StoryblokRichtext = {
@@ -72,7 +73,7 @@ declare module "storyblok-rich-text-react-renderer" {
   export const NODE_HR = "horizontal_rule";
   export const NODE_BR = "hard_break";
   export const NODE_IMAGE = "image";
-  export const NODE_EMOJI = 'emoji';
+  export const NODE_EMOJI = "emoji";
 
   export const MARK_BOLD = "bold";
   export const MARK_ITALIC = "italic";
@@ -81,10 +82,10 @@ declare module "storyblok-rich-text-react-renderer" {
   export const MARK_CODE = "code";
   export const MARK_LINK = "link";
   export const MARK_STYLED = "styled";
-  export const MARK_SUBSCRIPT = 'subscript';
-  export const MARK_SUPERSCRIPT = 'superscript';
-  export const MARK_HIGHLIGHT = 'highlight';
-  export const MARK_TEXT_STYLE = 'textStyle';
+  export const MARK_SUBSCRIPT = "subscript";
+  export const MARK_SUPERSCRIPT = "superscript";
+  export const MARK_HIGHLIGHT = "highlight";
+  export const MARK_TEXT_STYLE = "textStyle";
 
   export interface RenderOptions {
     blokResolvers?: {
