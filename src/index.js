@@ -123,21 +123,22 @@ const codeblockNodeResolver = (children, props) => {
     return React.createElement('pre', null, code);
 };
 
-const emojiNodeResolver = (_, { name, emoji, fallbackImage }) => {
+const emojiNodeResolver = (_, attrs) => {
+    if (!attrs) return null;
     const props = {
         'data-type': 'emoji',
-        'data-name': name,
-        emoji
+        'data-name': attrs.name,
+        emoji: attrs.emoji,
     }
-    if (emoji || !fallbackImage) {
-        return React.createElement('span', props, emoji);
+    if (attrs.emoji || !attrs.fallbackImage) {
+        return React.createElement('span', props, attrs.emoji);
     } else {
         const fallbackProps = {
-            src: fallbackImage,
+            src: attrs.fallbackImage,
             draggable: 'false',
             loading: 'lazy',
             align: 'absmiddle',
-            alt: name,
+            alt: attrs.name,
         };
         const fallback = React.createElement('img', fallbackProps);
         return React.createElement('span', props, fallback);
@@ -147,28 +148,26 @@ const emojiNodeResolver = (_, { name, emoji, fallbackImage }) => {
 const simpleMarkResolver = element => children =>
     React.createElement(element, null, children);
 
-const linkMarkResolver = (children, { linktype, href, target }) => {
-    const props = {
-        href: linktype === 'email' ? `mailto:${href}` : href,
-        target,
-    };
+const linkMarkResolver = (children, attrs) => {
+    const props = attrs ? {
+        href: attrs.linktype === 'email' ? `mailto:${attrs.href}` : attrs.href,
+        target: attrs.target,
+    } : {};
     return React.createElement('a', props, children);
 };
 
-const styledMarkResolver = (children, props) =>
-    React.createElement('span', { className: props.class }, children);
-
-const highlightMarkResolver = (children, { color }) => {
-    const props = {
-      style: { backgroundColor: color },
-    };
+const styledMarkResolver = (children, attrs) => {
+    const props = attrs ? { className: attrs.class } : {};
     return React.createElement('span', props, children);
 }
 
-const textStyleMarkResolver = (children, { color }) => {
-    const props = {
-      style: { color },
-    };
+const highlightMarkResolver = (children, attrs) => {
+    const props = attrs ? { style: { backgroundColor: attrs.color } } : {};
+    return React.createElement('span', props, children);
+}
+
+const textStyleMarkResolver = (children, attrs) => {
+    const props = attrs ? { style: { color: attrs.color } } : {};
     return React.createElement('span', props, children);
 }
 
