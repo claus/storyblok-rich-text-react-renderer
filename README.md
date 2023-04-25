@@ -97,6 +97,7 @@ Supported element types and their resolver function signatures are:
 - MARK_SUPERSCRIPT — `(children) => { ... }`
 - MARK_HIGHLIGHT — `(children, { color }) => { ... }`
 - MARK_TEXT_STYLE — `(children, { color }) => { ... }`
+- MARK_ANCHOR — `(children, { id }) => { ... }`
 
 #### Example: Map bold elements to `<strong>`
 
@@ -266,6 +267,7 @@ Default mark resolvers:
 - MARK_SUPERSTRING — `<sup> ... </sup>`
 - MARK_HIGHLIGHT — `<span style> ... </span>`
 - MARK_TEXT_STYLE — `<span style> ... </span>`
+- MARK_ANCHOR — `<span id> ... </span>`
 
 Default node resolvers:
 
