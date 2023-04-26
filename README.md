@@ -296,3 +296,4 @@ Default node resolvers:
 - 2.4.0 — Add TypeScript type definitions (index.d.ts)
 - 2.5.0 — Add textResolver
 - 2.7.0 — Add NODE_EMOJI, MARK_SUBSTRING, MARK_SUPERSTRING, MARK_HIGHLIGHT and MARK_TEXT_STYLE resolvers
+- 2.8.0 — Add MARK_ANCHOR resolver
