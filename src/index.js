@@ -23,6 +23,7 @@ export const MARK_SUBSCRIPT = 'subscript';
 export const MARK_SUPERSCRIPT = 'superscript';
 export const MARK_HIGHLIGHT = 'highlight';
 export const MARK_TEXT_STYLE = 'textStyle';
+export const MARK_ANCHOR = 'anchor';
 
 export function render(document, options = {}) {
     if (
@@ -171,6 +172,11 @@ const textStyleMarkResolver = (children, attrs) => {
     return React.createElement('span', props, children);
 }
 
+const anchorMarkResolver = (children, attrs) => {
+    const props = attrs ? { id: attrs.id } : {};
+    return React.createElement('span', props, children);
+}
+
 const defaultNodeResolvers = {
     [NODE_HEADING]: headingNodeResolver,
     [NODE_CODEBLOCK]: codeblockNodeResolver,
@@ -197,4 +203,5 @@ const defaultMarkResolvers = {
     [MARK_SUPERSCRIPT]: simpleMarkResolver('sup'),
     [MARK_HIGHLIGHT]: highlightMarkResolver,
     [MARK_TEXT_STYLE]: textStyleMarkResolver,
+    [MARK_ANCHOR]: anchorMarkResolver,
 };
