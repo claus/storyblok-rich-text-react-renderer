@@ -1,6 +1,12 @@
 declare module "storyblok-rich-text-react-renderer" {
   import { ReactNode } from "react";
 
+  type LinkCustomAttributes = {
+    rel?: string;
+    title?: string;
+    [key: string]: any;
+  };
+
   export type StoryblokRichtextContentType =
     | "heading"
     | "code_block"
@@ -54,6 +60,7 @@ declare module "storyblok-rich-text-react-renderer" {
         class?: string;
         color?: string;
         id?: string;
+        custom?: LinkCustomAttributes;
       };
     }[];
     text?: string;
@@ -114,6 +121,7 @@ declare module "storyblok-rich-text-react-renderer" {
           target?: string;
           anchor?: string;
           uuid?: string;
+          custom?: LinkCustomAttributes;
         }
       ) => JSX.Element | null;
       [MARK_STYLED]?: (
