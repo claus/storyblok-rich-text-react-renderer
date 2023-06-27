@@ -92,7 +92,7 @@ Supported element types and their resolver function signatures are:
 - MARK_UNDERLINE — `(children) => { ... }`
 - MARK_CODE — `(children) => { ... }`
 - MARK_STYLED — `(children, { class }) => { ... }`
-- MARK_LINK — `(children, { linktype, href, target, anchor, uuid }) => { ... }`
+- MARK_LINK — `(children, { linktype, href, target, anchor, uuid, custom }) => { ... }`
 - MARK_SUBSCRIPT — `(children) => { ... }`
 - MARK_SUPERSCRIPT — `(children) => { ... }`
 - MARK_HIGHLIGHT — `(children, { color }) => { ... }`
@@ -297,3 +297,4 @@ Default node resolvers:
 - 2.5.0 — Add textResolver
 - 2.7.0 — Add NODE_EMOJI, MARK_SUBSTRING, MARK_SUPERSTRING, MARK_HIGHLIGHT and MARK_TEXT_STYLE resolvers
 - 2.8.0 — Add MARK_ANCHOR resolver
+- 2.9.0 - Add type definition for custom link attributes in MARK_LINK
