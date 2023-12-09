@@ -6,6 +6,10 @@
 
 Renders Storyblok rich text content to React elements.
 
+## Sponsors
+
+[![](https://github.com/storyblok.png?size=75&v=4)](https://github.com/storyblok)
+
 ## Motivation
 
 Storyblok provides a renderer for its rich text field type via their
