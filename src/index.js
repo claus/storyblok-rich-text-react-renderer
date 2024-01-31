@@ -168,7 +168,7 @@ const highlightMarkResolver = (children, attrs) => {
 }
 
 const textStyleMarkResolver = (children, attrs) => {
-    const props = attrs ? { style: { color: attrs.color } } : {};
+    const props = attrs?.color ? { style: { color: attrs.color } } : {};
     return React.createElement('span', props, children);
 }
 

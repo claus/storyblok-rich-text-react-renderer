@@ -302,3 +302,4 @@ Default node resolvers:
 - 2.7.0 — Add NODE_EMOJI, MARK_SUBSTRING, MARK_SUPERSTRING, MARK_HIGHLIGHT and MARK_TEXT_STYLE resolvers
 - 2.8.0 — Add MARK_ANCHOR resolver
 - 2.9.0 - Add type definition for custom link attributes in MARK_LINK
+- 2.9.1 - Safer implementation of textStyleMarkResolver
