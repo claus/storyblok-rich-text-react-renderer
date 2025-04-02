@@ -11,6 +11,10 @@ export const NODE_HR = 'horizontal_rule';
 export const NODE_BR = 'hard_break';
 export const NODE_IMAGE = 'image';
 export const NODE_EMOJI = 'emoji';
+export const NODE_TABLE = 'table';
+export const NODE_TABLE_HEADER = 'tableHeader';
+export const NODE_TABLE_ROW = 'tableRow';
+export const NODE_TABLE_CELL = 'tableCell';
 
 export const MARK_BOLD = 'bold';
 export const MARK_ITALIC = 'italic';
@@ -57,12 +61,8 @@ export function render(document, options = {}) {
                 : element;
 
         const renderNodes = nodes => {
-            const elements = nodes
-                ? nodes.map(renderNode).filter(node => node != null)
-                : null;
-            return Array.isArray(elements) && elements.length === 0
-                ? null
-                : elements;
+            const elements = nodes ? nodes.map(renderNode).filter(node => node != null) : null;
+            return Array.isArray(elements) && elements.length === 0 ? null : elements;
         };
 
         const renderNode = node => {
@@ -88,19 +88,14 @@ export function render(document, options = {}) {
                 const marks = node.marks ?? [];
                 return marks.reduceRight((children, mark) => {
                     const resolver = markResolvers[mark.type];
-                    return resolver
-                        ? addKey(resolver(children, mark.attrs))
-                        : children;
+                    return resolver ? addKey(resolver(children, mark.attrs)) : children;
                 }, childNode);
             }
         };
 
         return renderNodes(document.content);
     } else if (typeof document === 'string') {
-        const {
-          defaultStringResolver = (str) => str,
-          textResolver = (str) => str,
-        } = options;
+        const { defaultStringResolver = str => str, textResolver = str => str } = options;
         return defaultStringResolver(textResolver(document));
     }
     return null;
@@ -109,14 +104,12 @@ export function render(document, options = {}) {
 const simpleNodeResolver = element => children =>
     children != null ? React.createElement(element, null, children) : null;
 
-const emptyNodeResolver = element => () =>
-    React.createElement(element);
+const emptyNodeResolver = element => () => React.createElement(element);
 
 const headingNodeResolver = (children, props) =>
     React.createElement(`h${props.level}`, null, children);
 
-const imageNodeResolver = (children, props) =>
-    React.createElement('img', props, children);
+const imageNodeResolver = (children, props) => React.createElement('img', props, children);
 
 const codeblockNodeResolver = (children, props) => {
     const codeProps = { className: props.class };
@@ -130,7 +123,7 @@ const emojiNodeResolver = (_, attrs) => {
         'data-type': 'emoji',
         'data-name': attrs.name,
         emoji: attrs.emoji,
-    }
+    };
     if (attrs.emoji || !attrs.fallbackImage) {
         return React.createElement('span', props, attrs.emoji);
     } else {
@@ -146,36 +139,62 @@ const emojiNodeResolver = (_, attrs) => {
     }
 };
 
-const simpleMarkResolver = element => children =>
-    React.createElement(element, null, children);
+const tableCellNodeResolver = el => (children, props) => {
+    const tableCellProps = {};
+    const tableCellStyle = {};
+    if (props.colspan !== 1) {
+        tableCellProps.colspan = props.colspan;
+    }
+    if (props.rowspan !== 1) {
+        tableCellProps.rowspan = props.rowspan;
+    }
+    if (props.backgroundColor) {
+        tableCellStyle.backgroundColor = props.backgroundColor;
+    }
+    if (Array.isArray(props.colwidth)) {
+        if (props.colwidth.length === 1) {
+            tableCellStyle['width'] = props.colwidth[0] + 'px';
+        } else {
+            tableCellProps['data-colwidth'] = props.colwidth.join(',');
+        }
+    }
+    if (Object.keys(tableCellStyle).length > 0) {
+        tableCellProps.style = tableCellStyle;
+    }
+    return React.createElement(el, tableCellProps, children);
+};
+
+const simpleMarkResolver = element => children => React.createElement(element, null, children);
 
 const linkMarkResolver = (children, attrs) => {
-    const props = attrs ? {
-        href: attrs.linktype === 'email' ? `mailto:${attrs.href}` : attrs.href,
-        target: attrs.target,
-    } : {};
+    const props = attrs
+        ? {
+              href: attrs.linktype === 'email' ? `mailto:${attrs.href}` : attrs.href,
+              target: attrs.target,
+          }
+        : {};
     return React.createElement('a', props, children);
 };
 
 const styledMarkResolver = (children, attrs) => {
     const props = attrs ? { className: attrs.class } : {};
     return React.createElement('span', props, children);
-}
+};
 
 const highlightMarkResolver = (children, attrs) => {
     const props = attrs ? { style: { backgroundColor: attrs.color } } : {};
     return React.createElement('span', props, children);
-}
+};
 
 const textStyleMarkResolver = (children, attrs) => {
     const props = attrs?.color ? { style: { color: attrs.color } } : {};
     return React.createElement('span', props, children);
-}
+};
 
 const anchorMarkResolver = (children, attrs) => {
     const props = attrs ? { id: attrs.id } : {};
     return React.createElement('span', props, children);
-}
+};
 
 const defaultNodeResolvers = {
     [NODE_HEADING]: headingNodeResolver,
@@ -189,6 +208,10 @@ const defaultNodeResolvers = {
     [NODE_HR]: emptyNodeResolver('hr'),
     [NODE_BR]: emptyNodeResolver('br'),
     [NODE_EMOJI]: emojiNodeResolver,
+    [NODE_TABLE]: simpleNodeResolver('table'),
+    [NODE_TABLE_ROW]: simpleNodeResolver('tr'),
+    [NODE_TABLE_HEADER]: tableCellNodeResolver('th'),
+    [NODE_TABLE_CELL]: tableCellNodeResolver('td'),
 };
 
 const defaultMarkResolvers = {
