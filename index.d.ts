@@ -1,5 +1,5 @@
 declare module 'storyblok-rich-text-react-renderer' {
-    import { ReactNode } from 'react';
+    import { ReactNode, JSX } from 'react';
 
     type LinkCustomAttributes = {
         rel?: string;
@@ -19,6 +19,10 @@ declare module 'storyblok-rich-text-react-renderer' {
         | 'hard_break'
         | 'image'
         | 'emoji'
+        | 'table'
+        | 'tableHeader'
+        | 'tableRow'
+        | 'tableCell'
         | 'blok'
         | 'text';
 
@@ -44,6 +48,13 @@ declare module 'storyblok-rich-text-react-renderer' {
             src?: string;
             alt?: string;
             title?: string;
+            name?: string;
+            emoji?: string;
+            fallbackImage?: string;
+            colspan?: number;
+            rowspan?: number;
+            colwidth?: number[];
+            backgroundColor?: string;
             order?: number;
             body?: Array<{
                 _uid: string;
@@ -83,6 +94,10 @@ declare module 'storyblok-rich-text-react-renderer' {
     export const NODE_BR = 'hard_break';
     export const NODE_IMAGE = 'image';
     export const NODE_EMOJI = 'emoji';
+    export const NODE_TABLE = 'table';
+    export const NODE_TABLE_HEADER = 'tableHeader';
+    export const NODE_TABLE_ROW = 'tableRow';
+    export const NODE_TABLE_CELL = 'tableCell';
 
     export const MARK_BOLD = 'bold';
     export const MARK_ITALIC = 'italic';
@@ -160,6 +175,26 @@ declare module 'storyblok-rich-text-react-renderer' {
                     name?: string;
                     emoji?: string;
                     fallbackImage?: string;
+                }
+            ) => JSX.Element | null;
+            [NODE_TABLE]?: (children: ReactNode) => JSX.Element | null;
+            [NODE_TABLE_HEADER]?: (
+                children: ReactNode,
+                props: {
+                    colspan?: number;
+                    rowspan?: number;
+                    colwidth?: number[];
+                    backgroundColor?: string;
+                }
+            ) => JSX.Element | null;
+            [NODE_TABLE_ROW]?: (children: ReactNode) => JSX.Element | null;
+            [NODE_TABLE_CELL]?: (
+                children: ReactNode,
+                props: {
+                    colspan?: number;
+                    rowspan?: number;
+                    colwidth?: number[];
+                    backgroundColor?: string;
                 }
             ) => JSX.Element | null;
             [NODE_LI]?: (children: ReactNode) => JSX.Element | null;
