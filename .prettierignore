@@ -1,0 +1,7 @@
+package-lock.json
+package.json
+README.md
+.next
+.vscode
+node_modules
+public

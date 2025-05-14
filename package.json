@@ -1,14 +1,14 @@
 {
   "name": "storyblok-rich-text-react-renderer",
   "description": "A React renderer for Storyblok rich text content",
-  "version": "2.9.2",
+  "version": "3.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "./index.d.ts",
   "author": {
     "name": "Claus Wahlers",
-    "email": "claus@codeazur.com.br"
+    "email": "w@hle.rs"
   },
   "repository": {
     "type": "git",
@@ -32,14 +32,15 @@
     "react": ">=16.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.0",
+    "@babel/core": "^7.27.1",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@babel/plugin-transform-arrow-functions": "^7.23.3",
-    "@babel/plugin-transform-destructuring": "^7.23.3",
+    "@babel/plugin-transform-arrow-functions": "^7.27.1",
+    "@babel/plugin-transform-destructuring": "^7.27.1",
+    "@madeinhaus/prettier-config": "^1.2.1",
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "rollup": "^4.12.1",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "rollup": "^4.40.2",
     "rollup-plugin-peer-deps-external": "^2.2.4"
   }
 }
