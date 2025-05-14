@@ -3,12 +3,7 @@
 [![npm](https://img.shields.io/npm/v/storyblok-rich-text-react-renderer?style=flat-square)](https://www.npmjs.com/package/storyblok-rich-text-react-renderer)
 [![GitHub](https://img.shields.io/github/license/claus/storyblok-rich-text-react-renderer?style=flat-square)](https://github.com/claus/storyblok-rich-text-react-renderer/blob/master/LICENSE)
 
-
 Renders Storyblok rich text content to React elements.
-
-## Sponsors
-
-[![](https://github.com/storyblok.png?size=75&v=4)](https://github.com/storyblok)
 
 ## Motivation
 
@@ -159,6 +154,10 @@ Supported element types and their resolver function signatures are:
 - NODE_LI — `(children) => { ... }`
 - NODE_HR — `() => { ... }`
 - NODE_BR — `() => { ... }`
+- NODE_TABLE — `(children) => { ... }`
+- NODE_TABLE_ROW — `(children) => { ... }`
+- NODE_TABLE_CELL — `(children, { colspan, rowspan, backgroundColor, colwidth }) => { ... }`
+- NODE_TABLE_HEADER — `(children, { colspan, rowspan, backgroundColor, colwidth }) => { ... }`
 
 #### Example: Map image elements to custom React components
 
@@ -286,6 +285,10 @@ Default node resolvers:
 - NODE_LI — `<li> ... </li>`
 - NODE_HR — `<hr />`
 - NODE_BR — `<br />`
+- NODE_TABLE — `<table> ... </table>`
+- NODE_TABLE_ROW — `<tr> ... </tr>`
+- NODE_TABLE_CELL — `<td style colspan rowspan data-colwidth> ... </td>`
+- NODE_TABLE_HEADER — `<th style colspan rowspan data-colwidth> ... </th>`
 
 ## Changelog
 
@@ -303,3 +306,4 @@ Default node resolvers:
 - 2.8.0 — Add MARK_ANCHOR resolver
 - 2.9.0 - Add type definition for custom link attributes in MARK_LINK
 - 2.9.2 - Safer implementation of textStyleMarkResolver
+- 3.0.0 - Add NODE_TABLE, NODE_TABLE_ROW, NODE_TABLE_CELL and NODE_TABLE_HEADER resolvers
